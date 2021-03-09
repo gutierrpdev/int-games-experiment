@@ -75,7 +75,7 @@ export const Results: React.FC<ResultsProps> = ({ userId }) => {
         <Message.List>
           {blekResult.length > 0 ?
             (<Message.Item>
-              Número de niveles completados en Blek (Minuto 5): {blekResult[0]}.
+              Número de niveles completados en Blek (Minuto 10): {blekResult[0]}.
             </Message.Item>)
             :
             (<Message.Item>
@@ -85,7 +85,7 @@ export const Results: React.FC<ResultsProps> = ({ userId }) => {
 
           {edgeResult.length > 0 ?
             (<Message.Item>
-              Número de niveles completados en Edge (Minuto 6): {edgeResult[0]}.
+              Número de niveles completados en Edge (Minuto 12): {edgeResult[0]}.
             </Message.Item>)
             :
             (<Message.Item>
