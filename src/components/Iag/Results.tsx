@@ -41,7 +41,8 @@ export const Results: React.FC<ResultsProps> = ({ userId }) => {
       });
     }
     else {
-      return fetch(FLASK_URL + `${gameName}/${userId}`, {
+      const mins = gameName === 'Blek' ? 10 : 12;
+      return fetch(FLASK_URL + `${gameName}/${userId}/${mins}`, {
         method: "GET",
         /*credentials : 'include',*/
         headers: {
