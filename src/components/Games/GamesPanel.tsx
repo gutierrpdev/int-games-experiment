@@ -23,7 +23,7 @@ export const GamesPanel: React.FC<GamesPanelProps> =
           icon='gamepad' size='big'
           header='Portal de juegos TFG'
           content='Bienvenidos. En esta página encontraréis una serie de juegos desarrollados por alumnos de la facultad de informática de la
-        UCM como parte de un TFG sobre el estudio de las capacidades cognitivas por medio de videojuegos.'
+        UCM como parte de un TFG para el estudio de las capacidades por medio de videojuegos.'
         />
 
         <Message size='large' warning>
@@ -42,8 +42,8 @@ export const GamesPanel: React.FC<GamesPanelProps> =
           Los juegos no funcionarán adecuadamente desde dispositivos móviles.
         </Message>
 
-        <Message>
-          <Message.Header>Instrucciones e Indicaciones</Message.Header>
+        <Message size='large'>
+          <Message.Header><u>Instrucciones e Indicaciones</u></Message.Header>
           <Message.List items={information} />
         </Message>
 
