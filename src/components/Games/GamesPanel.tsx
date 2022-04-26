@@ -28,7 +28,7 @@ export const GamesPanel: React.FC<GamesPanelProps> =
 
         <Message size='large' warning>
           <Message.Header>
-          Compatibilidad de los juegos
+            Compatibilidad de los juegos
           </Message.Header>
           Esta plataforma está diseñada para ser usada SÓLO desde los siguientes navegadores web de PC:
           <Message.List>
@@ -49,21 +49,21 @@ export const GamesPanel: React.FC<GamesPanelProps> =
 
         <Grid celled centered columns={3}>
           <Grid.Column attached>
-            <Image src='/img/edge.jpg' size='large' rounded centered />
-            <Button onClick={() => onGameSelect('edge')}
-              attached='bottom'
-              color={edgeCompleted ? 'green' : 'blue'}
-            >
-              {edgeCompleted ? 'Completado' : '¡Empezar juego!'}
-            </Button>
-          </Grid.Column>
-          <Grid.Column attached>
             <Image src='/img/blek.jpg' size='large' rounded centered />
             <Button onClick={() => onGameSelect('blek')}
               attached='bottom'
               color={blekCompleted ? 'green' : 'blue'}
             >
               {blekCompleted ? 'Completado' : '¡Empezar juego!'}
+            </Button>
+          </Grid.Column>
+          <Grid.Column attached>
+            <Image src='/img/edge.jpg' size='large' rounded centered />
+            <Button onClick={() => onGameSelect('edge')}
+              attached='bottom'
+              color={edgeCompleted ? 'green' : 'blue'}
+            >
+              {edgeCompleted ? 'Completado' : '¡Empezar juego!'}
             </Button>
           </Grid.Column>
           <Grid.Column>

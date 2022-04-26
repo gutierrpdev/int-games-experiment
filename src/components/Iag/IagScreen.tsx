@@ -137,27 +137,27 @@ export const Iag: React.FC = () => {
         {/* Only display games link if not in questions screen */}
         {history.location.pathname !== '/profile/questions' && (
           <>
-          <Link to='/profile/games'>
-            <Menu.Item name='games'>
-              <Icon name='gamepad' />
-              Juegos
-          </Menu.Item>
-          </Link>
-        
-        <Link to='/profile/results'>
-          <Menu.Item name='Resultados'>
-            <Icon name='calculator' />
-            Resultados
-          </Menu.Item>
-        </Link>
+            <Link to='/profile/games'>
+              <Menu.Item name='games'>
+                <Icon name='gamepad' />
+                Juegos
+              </Menu.Item>
+            </Link>
 
-        <Link to='/profile/about'>
-          <Menu.Item name='Contacto'>
-            <Icon name='question' />
-            Contacto
-          </Menu.Item>
-        </Link>
-        </>
+            <Link to='/profile/results'>
+              <Menu.Item name='Resultados'>
+                <Icon name='calculator' />
+                Resultados
+              </Menu.Item>
+            </Link>
+
+            <Link to='/profile/about'>
+              <Menu.Item name='Contacto'>
+                <Icon name='question' />
+                Contacto
+              </Menu.Item>
+            </Link>
+          </>
         )}
 
         <Menu.Menu position='right'>
@@ -216,7 +216,7 @@ export const Iag: React.FC = () => {
         />
       </Route>
       <Route path='/profile/about'>
-        <About/>
+        <About />
       </Route>
     </div>
   );
