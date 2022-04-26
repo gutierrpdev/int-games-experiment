@@ -14,7 +14,7 @@ export const QuestionsPanel: React.FC<QuestionsPanelProps> = ({ onQuestionsSubmi
   const [videogameExpertise, setVideogameExpertise] = useState<number>(0);
 
   const values = [0, 1, 2, 3, 4, 5, 6, 7];
-  const hoursPerWeekValues = Array.from({ length: 41 }, (_, i) => i);
+  const hoursPerWeekValues = Array.from({ length: 7 * 24 }, (_, i) => i);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>, data: CheckboxProps) {
     switch (data.name) {
