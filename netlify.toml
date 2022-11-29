@@ -9,7 +9,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "http://inteligencia.padaonegames.com/api:splat"
+  to = "http://inteligencia.padaonegames.com/api/:splat"
   status = 200
   force = true
 
