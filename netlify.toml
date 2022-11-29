@@ -7,6 +7,12 @@
   to = "/index.html"
   status = 200
 
+[[redirects]]
+  from = "/api/*"
+  to = "http://inteligencia.padaonegames.com/api:splat"
+  status = 200
+  force = true
+
 [[headers]]
   for = "*.unityweb"
   [headers.values]
