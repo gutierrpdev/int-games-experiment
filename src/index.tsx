@@ -1,16 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { App } from './App';
-import * as serviceWorker from './serviceWorker';
-import 'semantic-ui-css/semantic.min.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import { App } from "./App";
+import "semantic-ui-css/semantic.min.css";
+import { initializeServices } from "./services";
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+/**
+ * Initializes React Application by starting up its services and rendering
+ * the main single-page application component into a root node in the DOM.
+ *
+ * @remarks Exporting this method is not strictly necessary, but it is convenient
+ * to provide typedoc with an entrypoint to generate our project's documentation.
+ * From here, everything that is referenced will be (recursively) added to our project's
+ * docs.
+ *
+ * @author Pablo Gutiérrez, 2021
+ */
+export const startApp = () => {
+  initializeServices();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+};
+
+startApp();

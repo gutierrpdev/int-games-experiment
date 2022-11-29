@@ -1,79 +1,44 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from "react";
 import Unity, { UnityContent } from "react-unity-webgl";
-import { API_BASE_URL } from '../../constants/apiConstants';
-import { Progress, Container, Message } from 'semantic-ui-react';
-
-interface GameEvent {
-  timestamp: number;
-  userId: string;
-  gameName: string;
-  name: string;
-  orderInSequence: number;
-  parameters: Array<{ name: string, value: string }>;
-};
+import { Progress, Container, Message } from "semantic-ui-react";
+import { AuthContext } from "../Auth/AuthStore";
+import { IEvent } from "../../services/event.model";
+import { eventService } from "../../services";
 
 interface UnityLoaderProps {
   gameName: string;
-  buildName: string
+  buildName: string;
   onGameOver: () => void;
 }
 
-export const UnityLoader: React.FC<UnityLoaderProps> = ({ gameName, buildName, onGameOver }) => {
+export const UnityLoader: React.FC<UnityLoaderProps> = ({
+  gameName,
+  buildName,
+  onGameOver,
+}) => {
+  const { userData } = useContext(AuthContext);
   const [progression, setProgression] = useState<number>(0);
 
   const unityContent = new UnityContent(
-    `${process.env.PUBLIC_URL}/builds/${gameName}/${buildName}.json`,
-    `${process.env.PUBLIC_URL}/builds/${gameName}/UnityLoader.js`,
+    `${process.env.PUBLIC_URL}/builds/${gameName}/${process.env.REACT_APP_GAMES_MODE}/${buildName}.json`,
+    `${process.env.PUBLIC_URL}/builds/${gameName}/${process.env.REACT_APP_GAMES_MODE}/UnityLoader.js`
   );
 
   unityContent.on("progress", (progress: number) => {
     setProgression(progress);
   });
 
-  unityContent.on("LogEvent", (eventJSON: string) => {
-    const event: GameEvent = JSON.parse(eventJSON);
-    const body = {
-      payload: event,
-      token: localStorage.getItem('token')
-    };
+  unityContent.on("LogEvent", async (eventJSON: string) => {
+    const event: IEvent = JSON.parse(eventJSON);
+    event.userId = userData?.userId ?? "";
+    event.buildName = process.env.REACT_APP_GAMES_MODE ?? "regular";
 
-    fetch(API_BASE_URL + 'events', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      /* credentials: 'include',*/
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => console.log(response))
-      .catch(err => console.log(err));
+    const res = await eventService.sendEvent(event);
+    console.log(res);
   });
 
   unityContent.on("GameOver", () => {
-    const payload = gameName ===
-      'Blek' ? { blekCompleted: true }
-      : (gameName === 'Edge' ? { edgeCompleted: true }
-        : { unpossibleCompleted: true });
-    const body = {
-      payload: payload,
-      token: localStorage.getItem('token')
-    };
-
-    fetch(API_BASE_URL + 'users/me', {
-      method: 'PATCH',
-      body: JSON.stringify(body),
-      /* credentials: 'include', */
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        onGameOver();
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    onGameOver();
   });
 
   unityContent.setFullscreen(false);
@@ -84,18 +49,21 @@ export const UnityLoader: React.FC<UnityLoaderProps> = ({ gameName, buildName, o
         <Progress
           percent={progression * 100}
           indicating={progression < 1}
-          label={progression < 1 ? 'Cargando juego' : 'Carga Completada!'}
-          progress='percent' />
-      )}
-      {(progression > 0.85 && progression < 0.95) &&
-        <Message
-          icon='exclamation circle' size='small'
-          header='Carga interrumpida'
-          content='Si la carga del juego se queda congelada en 90% durante demasiado tiempo, recarga la página y vuelve a hacer click sobre este juego. Perdón por las molestias.'
+          label={progression < 1 ? "Cargando juego" : "Carga Completada!"}
+          progress="percent"
         />
-      }
-      <Container height='auto'>
+      )}
+      {progression > 0.85 && progression < 0.95 && (
+        <Message
+          icon="exclamation circle"
+          size="small"
+          header="Carga interrumpida"
+          content="Si la carga del juego se queda congelada en 90% durante demasiado tiempo, recarga la página y vuelve a hacer click sobre este juego. Perdón por las molestias."
+        />
+      )}
+      <Container height="auto">
         <Unity unityContent={unityContent} />
       </Container>
-    </div>);
-}
+    </div>
+  );
+};

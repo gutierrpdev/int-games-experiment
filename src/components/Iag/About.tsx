@@ -1,16 +1,15 @@
-import React from 'react';
-import { Message } from 'semantic-ui-react';
-import { Helmet } from 'react-helmet';
+import React from "react";
+import { Message } from "semantic-ui-react";
+import { Helmet } from "react-helmet";
 
 const information = [
-  'Mingxiao Guo: Doble Grado Ingeniería Informática y Matemáticas',
-  'Pablo Gutiérrez: Doble Grado Ingeniería Informática y Matemáticas',
-  'Alejandro Ortega: Grado en Desarrollo de Videojuegos',
-  'Correo general de contacto para los tres: tfgfdi27@gmail.com'
-]
+  "Mingxiao Guo: Doble Grado Ingeniería Informática y Matemáticas",
+  "Pablo Gutiérrez: Doble Grado Ingeniería Informática y Matemáticas",
+  "Alejandro Ortega: Grado en Desarrollo de Videojuegos",
+  "Correo general de contacto para los tres: tfgfdi27@gmail.com",
+];
 
 export const About: React.FC = () => {
-
   return (
     <div>
       <Helmet>
@@ -18,18 +17,21 @@ export const About: React.FC = () => {
       </Helmet>
 
       <Message
-        icon='question' size='big'
-        header='Portal de juegos TFG'
-        content='Bienvenidos. En esta página encontraréis una serie de juegos desarrollados por alumnos de la facultad de informática de la
+        icon="question"
+        size="big"
+        header="Portal de juegos TFG"
+        content="Bienvenidos. En esta página encontraréis una serie de juegos desarrollados por alumnos de la facultad de informática de la
         UCM como parte de un TFG sobre el estudio de capacidades por medio de videojuegos. 
         Ante cualquier duda, problema técnico, o cuestión que quieras plantearnos, incluyendo feedback para mejorar la aplicación,
-        por favor, no dudes en ponerte en contacto con nosotros usando la información listada más abajo.'
+        por favor, no dudes en ponerte en contacto con nosotros usando la información listada más abajo."
       />
 
       <Message>
-        <Message.Header>Información de contacto de los desarrolladores</Message.Header>
+        <Message.Header>
+          Información de contacto de los desarrolladores
+        </Message.Header>
         <Message.List items={information} />
       </Message>
     </div>
   );
-}
+};
